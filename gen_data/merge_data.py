@@ -16,6 +16,7 @@ out_dyn = open('./data.csv', 'w+')
 
 out_dyn.write('Name,G3D,G2D,Price,TDP,')
 out_dyn.write(','.join([f'm_{i}' for i in range(80)]))
+out_dyn.write('\n')
 
 s = 0
 for gpu_name in mounths_data.keys():
@@ -28,7 +29,6 @@ for gpu_name in mounths_data.keys():
     lit = lit.replace(' Series', '')
     if lit in bench:
         if '' not in bench[lit]:
-            out_dyn.write(','.join([gpu_name] + bench[lit][:2]+ [str(1 / float(bench[lit][3]))] + [str(1/float(bench[lit][4]))] + mounths_data[gpu_name]) + '\n')
-            out_dyn.write(','.join([gpu_name] + mounths_data[gpu_name]) + '\n')
+            out_dyn.write(','.join([gpu_name] + bench[lit][:2]+ [bench[lit][2]] + [bench[lit][4]] + mounths_data[gpu_name]))
             
 print(s)
