@@ -10,7 +10,6 @@ def main():
     data = GetData()
     statsDF = pd.DataFrame([dict(i.get_stats()) for i in data]).T
     statsDF.columns = [i.get_name() for i in data]
-    print(statsDF)
     # statsDF.plot(logy=False)
     # plt.show()
     # statsDF.plot(logy=False, legend=False)

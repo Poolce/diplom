@@ -108,8 +108,8 @@ def GetData():
     for line in lines[1:]:
         line = line[:-1]
         spl = line.split(',')
-        print(spl)
         metr = Metrics(float(spl[1]), float(spl[2]), float(spl[3]), float(spl[4]))
+        print(metr)
         stat = [float(i) for i in spl[5:]]
         res.append(GPU(spl[0], stat, metr))
         
