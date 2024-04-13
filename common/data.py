@@ -90,12 +90,18 @@ class GPU:
     def get_Jval(self) -> float:
         stats_arr = self.stat
         res = 0
+        start_flag = False
+        n = 0
         for i in range(len(stats_arr)):
+            if stats_arr[i] != 0:
+                start_flag = True
+            if not start_flag:
+                continue
             if i == 0: continue
             if stats_arr[i] != 0 and stats_arr[i-1]:
                 res += log(1 + ((stats_arr[i]-stats_arr[i-1])/stats_arr[i-1]))
-                
-        return res/len(stats_arr)
+            n+=1         
+        return res/n
 
 
 

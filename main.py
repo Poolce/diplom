@@ -10,20 +10,20 @@ def main():
     data = GetData()
     statsDF = pd.DataFrame([dict(i.get_stats()) for i in data]).T
     statsDF.columns = [i.get_name() for i in data]
-    # statsDF.plot(logy=False)
-    # plt.show()
-    # statsDF.plot(logy=False, legend=False)
-    # plt.show()
-    # statsDF.plot(logy=True, legend=False)
-    # plt.show()
+    statsDF.plot(logy=False)
+    plt.show()
+    statsDF.plot(logy=False, legend=False)
+    plt.show()
+    statsDF.plot(logy=True, legend=False)
+    plt.show()
 
-    # metricsDF= pd.DataFrame([i.get_metrics() for i in data])
+    metricsDF= pd.DataFrame([i.get_metrics() for i in data])
 
-    # corr = metricsDF.corr()
-    # sns.heatmap(corr, annot=True, cmap='vlag',
-    #         xticklabels=corr.columns.values,
-    #         yticklabels=corr.columns.values)
-    # plt.show()
+    corr = metricsDF.corr()
+    sns.heatmap(corr, annot=True, cmap='vlag',
+            xticklabels=corr.columns.values,
+            yticklabels=corr.columns.values)
+    plt.show()
 
     unitedDF = pd.DataFrame([i.get_united_metrics() for i in data])
 
@@ -50,6 +50,11 @@ def main():
     classificationDF.to_csv('ClassificationData.csv')
 
     
+    
+    j_arr = [(gpu.get_name(), gpu.get_Jval()) for gpu in data]
+    j_arr.sort(key=lambda x: x[1])
 
+    for i in j_arr:
+        print(i)
 if __name__ == '__main__':
     sys.exit(main())
