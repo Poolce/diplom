@@ -7,36 +7,11 @@ from os import getcwd
 
 @dataclass
 class Metrics:
-    G3Dmark: float
-    G2Dmark: float
+    G3: float
+    G2: float
     # reciprocal value 1/val
-    recip_price: float
-    recip_TDP: float
-
-
-@dataclass
-class Metrics2D:
-    _2D_G3Dmark2: float
-    _2D_G2Dmark2: float
-    _2D_recip_price2: float
-    _2D_recip_TDP2: float
-    _2D_G3Dmark_G2Dmark:float
-    _2D_G3Dmark_recip_price:float
-    _2D_G3Dmark_recip_TDP:float
-    _2D_G2Dmark2_recip_price:float
-    _2D_G2Dmark2_recip_TDP:float
-    _2D_recip_price_recip_TDP:float
-
-@dataclass
-class Metrics3D:
-    _3D_G3G2price: float
-    _3D_G3G2TDP: float
-    _3D_G3priceTDP: float
-    _3D_G2priceTDP: float
-
-@dataclass
-class Metrics4D:
-    _4D_ALL_CHARACTERS: float
+    RP: float
+    RTDP: float
 
 
 @dataclass   
@@ -48,43 +23,57 @@ class GPU:
     name: str
     stat: list
     metrics: Metrics
-    metrics2D: Metrics2D
-    metrics3D: Metrics3D
 
     def __init__(self, _name, _stat, _metr:Metrics) -> None:
         self.name = _name
         self.stat = _stat
         self.metrics = _metr
-        self.metrics2D = Metrics2D(_metr.G3Dmark**2, _metr.G2Dmark**2, _metr.recip_price**2, _metr.recip_TDP**2,
-                                   _metr.G3Dmark*_metr.G2Dmark, _metr.G3Dmark*_metr.recip_price, _metr.G3Dmark*_metr.recip_TDP,
-                                   _metr.G2Dmark*_metr.recip_price, _metr.G2Dmark*_metr.recip_TDP,
-                                   _metr.recip_price*_metr.recip_TDP)
-        
-        self.metrics3D = Metrics3D(_metr.G3Dmark*_metr.G2Dmark* _metr.recip_price,
-                                   _metr.G3Dmark*_metr.G2Dmark*_metr.recip_TDP,
-                                   _metr.G3Dmark* _metr.recip_price*_metr.recip_TDP,
-                                   _metr.G2Dmark* _metr.recip_price*_metr.recip_TDP)
-        
-        self.metrics4D = Metrics4D(_metr.G3Dmark*_metr.G2Dmark* _metr.recip_price*_metr.recip_TDP)
+        self._2d_metrics = self.get_2d_metrics()
+        self._3d_metrics = self.get_3d_metrics()
 
     def get_metrics(self) -> dict:
         return asdict(self.metrics)
     
-    def get_2dmetrics(self) -> dict:
-        return asdict(self.metrics2D)
+    def get_3d_metrics(self) -> dict:
+        res = {}
+        i = 0
+        for keya, vala in asdict(self.metrics).items():
+            i+=1
+            j=0
+            for keyb, valb in asdict(self.metrics).items():
+                j+=1
+                k = 0
+                for keyc, valc in asdict(self.metrics).items():
+                    k+=1
+                    if j >= i and k >= j and k >= i:
+                        res[f"{keya}*{keyb}*{keyc}"] = vala*valb*valc
+        return res
+    
+    def get_2d_metrics(self) -> dict:
+        res = {}
+        i = 0
+        for keya, vala in asdict(self.metrics).items():
+            i+=1
+            j = 0
+            for keyb, valb in asdict(self.metrics).items():
+                j+=1
+                if j <= i:
+                    res[f"{keya}*{keyb}"] = vala*valb
+        return res
     
     def get_stats(self) -> dict:
-        return {f'm_{i}' : self.stat[i] for i, _ in enumerate(self.stat)}
+        return {i : self.stat[i] for i, _ in enumerate(self.stat)}
 
     def get_name(self):
         return self.name
     
     def get_united_metrics(self) -> dict:
-        s = {'J': self.get_Jval()}
+        s = {}
         s.update(asdict(self.metrics))
-        s.update(asdict(self.metrics2D))
-        s.update(asdict(self.metrics3D))
-        s.update(asdict(self.metrics4D))
+        s = {"G3": s["G3"], "G2": s["G2"]}
+        s.update(self.get_2d_metrics())
+        
+        # s.update(self.get_3d_metrics())
         return s
     
     def get_Jval(self) -> float:
@@ -98,9 +87,9 @@ class GPU:
             if not start_flag:
                 continue
             if i == 0: continue
-            if stats_arr[i] != 0 and stats_arr[i-1]:
+            if stats_arr[i] and stats_arr[i-1]:
                 res += log(1 + ((stats_arr[i]-stats_arr[i-1])/stats_arr[i-1]))
-            n+=1         
+            n+=1
         return res/n
 
 
@@ -114,9 +103,24 @@ def GetData():
     for line in lines[1:]:
         line = line[:-1]
         spl = line.split(',')
+        if spl.count("0") < 65:
+            res.append(line)
+    print(f"len 1 = {len(lines)} len 2 = {len(res)}")
+    lines = res
+    res = []
+    sum_array = [0 for _ in range(80)]
+    for line in lines:
+        spl = line.split(',')
         metr = Metrics(float(spl[1]), float(spl[2]), float(spl[3]), float(spl[4]))
-        print(metr)
         stat = [float(i) for i in spl[5:]]
-        res.append(GPU(spl[0], stat, metr))
-        
-    return res
+        for i in range(len(stat)):
+            sum_array[i] += stat[i]
+        res.append((spl[0], stat, metr))
+    
+    res_gpu = []
+    for i in res:
+        s = []
+        for j in (range(len(i[1]))):
+            s.append(i[1][j] / sum_array[j])
+        res_gpu.append(GPU(i[0], s, i[2]))
+    return res_gpu
