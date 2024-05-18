@@ -4,6 +4,8 @@ from math import log
 from os.path import join, abspath
 from os import getcwd
 
+DIM = 0
+
 
 @dataclass
 class Metrics:
@@ -49,6 +51,24 @@ class GPU:
                         res[f"{keya}*{keyb}*{keyc}"] = vala*valb*valc
         return res
     
+    def get_4d_metrics(self) -> dict:
+        res = {}
+        i = 0
+        for keya, vala in asdict(self.metrics).items():
+            i+=1
+            j=0
+            for keyb, valb in asdict(self.metrics).items():
+                j+=1
+                k = 0
+                for keyc, valc in asdict(self.metrics).items():
+                    k+=1
+                    m = 0
+                    for keyd, vald in asdict(self.metrics).items():
+                        m+=1
+                        if j >= i and k >= j and m >= k:
+                            res[f"{keya}*{keyb}*{keyc}*{keyd}"] = vala*valb*valc*vald
+        return res
+    
     def get_2d_metrics(self) -> dict:
         res = {}
         i = 0
@@ -70,10 +90,13 @@ class GPU:
     def get_united_metrics(self) -> dict:
         s = {}
         s.update(asdict(self.metrics))
-        s = {"G3": s["G3"], "G2": s["G2"]}
-        s.update(self.get_2d_metrics())
-        
-        # s.update(self.get_3d_metrics())
+        # s = {"G3": s["G3"], "G2": s["G2"]}
+        if DIM > 1:
+            s.update(self.get_2d_metrics())
+        if DIM > 2:
+            s.update(self.get_3d_metrics())
+        if DIM > 3:
+            s.update(self.get_4d_metrics())
         return s
     
     def get_Jval(self) -> float:
@@ -95,7 +118,9 @@ class GPU:
 
 
 
-def GetData():
+def GetData(zero_num, dim):
+    global DIM
+    DIM = dim
     with open(join(abspath(join(__file__, '..')), 'data.csv'), 'r') as data:
         lines = data.readlines()
     
@@ -103,9 +128,10 @@ def GetData():
     for line in lines[1:]:
         line = line[:-1]
         spl = line.split(',')
-        if spl.count("0") < 65:
+        # print(zero_num)
+        if spl.count("0") < zero_num:
             res.append(line)
-    print(f"len 1 = {len(lines)} len 2 = {len(res)}")
+    # print(f"len 1 = {len(lines)} len 2 = {len(res)}")
     lines = res
     res = []
     sum_array = [0 for _ in range(80)]
@@ -123,4 +149,5 @@ def GetData():
         for j in (range(len(i[1]))):
             s.append(i[1][j] / sum_array[j])
         res_gpu.append(GPU(i[0], s, i[2]))
+    print(f"data len = {len(res_gpu)}")
     return res_gpu
