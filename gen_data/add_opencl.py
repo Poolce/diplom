@@ -20,7 +20,7 @@ def open_score(csv_path):
     res = {}
     for line in lines[1:]:
         parced_line = line.split(',')
-        res[f"{parced_line[0]} {parced_line[1]}"] = parced_line[4]
+        res[f"{parced_line[0]} {parced_line[1]}"] = (parced_line[4], parced_line[5][:-1])
     return res
 
 
@@ -29,7 +29,7 @@ scores_data = open_score("GPU_scores_graphicsAPIs.csv")
 
 out_dyn = open('./ndata.csv', 'w+')
 
-out_dyn.write('Name,Opencl,G3D,G2D,Price,TDP,')
+out_dyn.write('Name,Opencl,Vulkan,G3D,G2D,Price,TDP,')
 out_dyn.write(','.join([f'm_{i}' for i in range(80)]))
 out_dyn.write('\n')
 
@@ -38,7 +38,7 @@ print(main_data)
 
 for gpu_name in main_data.keys():
     for score_gpu in scores_data.keys():
-        if score_gpu == gpu_name:
-            out_dyn.write(f"{gpu_name},{scores_data[gpu_name]},{','.join(main_data[gpu_name])}")
+        if score_gpu == gpu_name and scores_data[gpu_name][0] and scores_data[gpu_name][1]:
+            out_dyn.write(f"{gpu_name},{scores_data[gpu_name][0]},{scores_data[gpu_name][1]},{','.join(main_data[gpu_name])}")
             s+=1
 print(s)
