@@ -11,6 +11,7 @@ DIM = 0
 
 @dataclass
 class Metrics:
+    Opencl: float
     G3: float
     G2: float
     # reciprocal value 1/val
@@ -93,7 +94,7 @@ class GPU:
         s = {}
         s.update(asdict(self.metrics))
         # s = {"G3": s["G3"], "G2": s["G2"]}
-        s.update({"J": self.get_Jval()})
+        # s.update({"J": self.get_Jval()})
         if DIM > 1:
             s.update(self.get_2d_metrics())
         if DIM > 2:
@@ -116,7 +117,6 @@ class GPU:
             if stats_arr[i] and stats_arr[i-1]:
                 res += log(1 + ((stats_arr[i]-stats_arr[i-1])/stats_arr[i-1]))
             n+=1
-        print(res/n + 2)
         return res/n + 2
     # def get_Jval(self) -> float:
     #     stats_arr = self.stat
@@ -137,7 +137,7 @@ class GPU:
 def GetData(zero_num, dim):
     global DIM
     DIM = dim
-    with open(join(abspath(join(__file__, '..')), 'data.csv'), 'r') as data:
+    with open(join(abspath(join(__file__, '..')), 'ndata.csv'), 'r') as data:
         lines = data.readlines()
     
     res = []
@@ -147,14 +147,37 @@ def GetData(zero_num, dim):
         # print(zero_num)
         if spl.count("0") < zero_num:
             res.append(line)
-    # print(f"len 1 = {len(lines)} len 2 = {len(res)}")
+    print(f"len 1 = {len(lines)} len = {len(res)}")
     lines = res
     res_gpu = []
     sum_array = [0 for _ in range(80)]
     for line in lines:
         spl = line.split(',')
-        metr = Metrics(float(spl[1]), float(spl[2]), float(spl[3]), float(spl[4]))
-        stat = [float(i) for i in spl[5:]]
+        # print((spl[0]),float(spl[1]), float(spl[2]), float(spl[3]), float(spl[4]), float(spl[5]))
+        metr = Metrics(float(spl[1]), float(spl[2]), float(spl[3]), 1/float(spl[4]), 1/float(spl[5]))
+        # print(res/n + 2)
+        stat = [float(i) for i in spl[6:]]
         res_gpu.append(GPU(spl[0], stat, metr))
         # print(stat)
+    return res_gpu
+
+def GetTest(zero_num, dim):
+    global DIM
+    DIM = dim
+    with open(join(abspath(join(__file__, '..')), 'ndata.csv'), 'r') as data:
+        lines = data.readlines()
+    res = []
+    for line in lines[1:]:
+        line = line[:-1]
+        spl = line.split(',')
+        res.append(line)
+    print(f"TEST len 1 = {len(lines)} len = {len(res)}")
+    
+    lines = res
+    res_gpu = []
+    for line in lines:
+        spl = line.split(',')
+        metr = Metrics(float(spl[1]), float(spl[2]), float(spl[3]), 1/float(spl[4]), 1/float(spl[5]))
+        stat = [float(i) for i in spl[6:]]
+        res_gpu.append(GPU(spl[0], stat, metr))
     return res_gpu

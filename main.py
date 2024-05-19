@@ -4,7 +4,7 @@ import pandas as pd
 import seaborn as sns
 import numpy as np
 
-from common.data import GetData
+from common.data import GetData, GetTest
 from sklearn.decomposition import PCA
 
 from sklearn import svm
@@ -27,7 +27,7 @@ DIM = 0
 
 class DataManager:
     data = GetData(ZERO_NUM, DIM)
-    test = GetData(ZERO_NUM, DIM)
+    test = GetTest(ZERO_NUM, DIM)
     
     @classmethod
     def get_statistic_df(cls):
@@ -213,8 +213,8 @@ def execute(h):
     ERROR = h[1]
     DIM = h[2]
     DataManager.data = GetData(ZERO_NUM, DIM)
-    DataManager.test = GetData(ZERO_NUM, DIM)
-    UIController.show_graphs()
+    DataManager.test = GetTest(ZERO_NUM, DIM)
+    # UIController.show_graphs()
     metricsDF= DataManager.get_united_metrics_df()
     scaledMetricsDF = (metricsDF - metricsDF.mean()) / metricsDF.std()
     # print(scaledMetricsDF)
@@ -236,5 +236,5 @@ def execute(h):
     
     
 if __name__ == '__main__':
-    execute([80, 0.002, 1.5])
-    # print(differential_evolution(execute, bounds=[(30,80), (0, 0.06), (0, 4)]))
+    # execute([31, 0.00091167, 3.7])
+    print(differential_evolution(execute, bounds=[(0,80), (0, 0.03), (0, 4)]))
