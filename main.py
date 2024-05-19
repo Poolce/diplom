@@ -88,10 +88,10 @@ class DataManager:
             for j in range(gpu_n):
                 if abs(gpu_vals[i] - gpu_vals[j]) > ERROR:
                     if j == i:
-                        continue
-                    if gpu_vals[i] > gpu_vals[j]:
+                        pass
+                    elif gpu_vals[i] > gpu_vals[j]:
                         res.append(1)
-                    else:
+                    elif gpu_vals[i] <= gpu_vals[j]:
                         res.append(-1)
         return res
     
@@ -105,11 +105,12 @@ class DataManager:
             for j in range(gpu_n):
                 if abs(cls.data[i].get_Jval() - cls.data[j].get_Jval()) > ERROR:
                     if j == i:
-                        continue
-                    row = []
-                    for k in range(metric_n):
-                            row.append(pca_data[i][k] - pca_data[j][k])
-                    res.append(row)
+                        pass
+                    else:
+                        row = []
+                        for k in range(metric_n):
+                                row.append(pca_data[i][k] - pca_data[j][k])
+                        res.append(row)
         return res
     
     @classmethod
@@ -128,12 +129,13 @@ class DataManager:
             res.append((gpu_.get_Jval(), gpu_.get_name()))
         res.sort(key= lambda x: x[0])
         s = 0
-        for i in range(len(res1)-1):
+        
+        for i in range(len(res)-1):
             k=-1
-            for j in range(len(res)):
+            for j in range(len(res1)):
                 if res1[i][1] == res[j][1]:
                     k = j
-                if res1[i+1][1] == res[j][1] and k!=-1:
+                if res[i+1][1] == res1[j][1] and k!=-1:
                     s+=1
         print(f"TESTING ACCURACY: {s/len(cls.test)} ZERO_NUM: {ZERO_NUM}, ERROR: {ERROR}, DIM: {DIM}")
         return s/len(cls.test)
@@ -142,9 +144,6 @@ class myPSA:
     def __init__(self, df) -> None:
         data_scaled = np.array(df)
         self.data_scaled = data_scaled
-        pca = PCA().fit(data_scaled)
-        explained_variance_ratio = pca.explained_variance_ratio_
-        cumulative_explained_variance = np.cumsum(explained_variance_ratio)
         # n_components = np.argmax(cumulative_explained_variance >= 0.9999) + 1
         n_components = min(len(data_scaled[0]), len(data_scaled))
         print(f"Optimal number of components: {n_components}")
@@ -215,9 +214,10 @@ def execute(h):
     DIM = h[2]
     DataManager.data = GetData(ZERO_NUM, DIM)
     DataManager.test = GetData(ZERO_NUM, DIM)
-    
+    UIController.show_graphs()
     metricsDF= DataManager.get_united_metrics_df()
     scaledMetricsDF = (metricsDF - metricsDF.mean()) / metricsDF.std()
+    # print(scaledMetricsDF)
     # print(scaledMetricsDF)
     psa = myPSA(scaledMetricsDF)
     NewData = psa.get_new_data()
@@ -225,7 +225,7 @@ def execute(h):
     # print(f"Accuracy: {svm.accuracy}")
     CompCoeff = psa.get_components()
     SvmCoeff = svm.get_coefficients()
-    coefArray = (SvmCoeff @ CompCoeff)
+    coefArray = np.dot(SvmCoeff, CompCoeff)
     coefArray =  coefArray[0]
     mean = list(metricsDF.mean())
     std = list(metricsDF.std())
@@ -236,4 +236,5 @@ def execute(h):
     
     
 if __name__ == '__main__':
-    print(differential_evolution(execute, bounds=[(30,80), (0, 0.06), (0, 4)]))
+    execute([80, 0.002, 1.5])
+    # print(differential_evolution(execute, bounds=[(30,80), (0, 0.06), (0, 4)]))

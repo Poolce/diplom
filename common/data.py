@@ -4,6 +4,8 @@ from math import log
 from os.path import join, abspath
 from os import getcwd
 
+
+import numpy as np
 DIM = 0
 
 
@@ -91,6 +93,7 @@ class GPU:
         s = {}
         s.update(asdict(self.metrics))
         # s = {"G3": s["G3"], "G2": s["G2"]}
+        s.update({"J": self.get_Jval()})
         if DIM > 1:
             s.update(self.get_2d_metrics())
         if DIM > 2:
@@ -113,7 +116,20 @@ class GPU:
             if stats_arr[i] and stats_arr[i-1]:
                 res += log(1 + ((stats_arr[i]-stats_arr[i-1])/stats_arr[i-1]))
             n+=1
-        return res/n
+        print(res/n + 2)
+        return res/n + 2
+    # def get_Jval(self) -> float:
+    #     stats_arr = self.stat
+    #     res = 1
+    #     for i in range(len(stats_arr)-1):
+    #         p = stats_arr[i+1] - stats_arr[i]
+    #         if p > 0:
+    #             res*=p
+    #         elif p < 0:
+    #             res/=-p
+    #         else:
+    #             pass
+    #     return np.random.rand()*3
 
 
 
@@ -133,21 +149,12 @@ def GetData(zero_num, dim):
             res.append(line)
     # print(f"len 1 = {len(lines)} len 2 = {len(res)}")
     lines = res
-    res = []
+    res_gpu = []
     sum_array = [0 for _ in range(80)]
     for line in lines:
         spl = line.split(',')
         metr = Metrics(float(spl[1]), float(spl[2]), float(spl[3]), float(spl[4]))
         stat = [float(i) for i in spl[5:]]
-        for i in range(len(stat)):
-            sum_array[i] += stat[i]
-        res.append((spl[0], stat, metr))
-    
-    res_gpu = []
-    for i in res:
-        s = []
-        for j in (range(len(i[1]))):
-            s.append(i[1][j] / sum_array[j])
-        res_gpu.append(GPU(i[0], s, i[2]))
-    print(f"data len = {len(res_gpu)}")
+        res_gpu.append(GPU(spl[0], stat, metr))
+        # print(stat)
     return res_gpu
