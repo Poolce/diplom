@@ -12,6 +12,8 @@ def open_csv(csv_path):
 bench = open_csv('GPU_benchmarks_v7.csv')
 mounths_data = open_csv('dynamyc_m_data.csv')
 
+scores_data = open_csv()
+
 out_dyn = open('./data.csv', 'w+')
 
 out_dyn.write('Name,G3D,G2D,Price,TDP,')
