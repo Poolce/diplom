@@ -28,7 +28,7 @@ bottom=2cm]{geometry}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
 \lstset{frame=none,
-  language=C++,
+  language=Python,
   aboveskip=3mm,
   belowskip=3mm,
   showstringspaces=false,
@@ -96,7 +96,9 @@ bottom=2cm]{geometry}
   потребительской ценностью, качеством, техническим уровнем, надежностью и
   прочими важными характеристиками. Несмотря на разнообразие аналогов,
   покупатель должен выбрать продукт, который лучше всего соответствует
-  его потребностям, учитывая все характеристики. Конкуренция,
+  его потребностям, учитывая все характеристики. 
+  
+  Конкуренция,
   фундаментальное понятие в современной экономике, представляет собой
   борьбу между товарами за право существования на рынке, стимулируя
   производителей к улучшению продукции для удовлетворения потребностей
@@ -121,29 +123,13 @@ bottom=2cm]{geometry}
   \newpage
 
   \section{Постановка задачи}
-  Цель данного исследования заключается в использовании методов машинного
-  обучения для выявления функции конкурентоспособности на основе динамики
-  спроса. Для достижения этой основной цели мы начнем с анализа
-  существующих экономических методик оценки конкурентоспособности,
-  близких к теме исследования, с целью выявления их преимуществ и
-  недостатков.
+  Цель данного исследования заключается в применении методов машинного обучения для определения функции конкурентоспособности на основе изменения спроса. Для достижения этой цели мы начнем с анализа существующих экономических методик оценки конкурентоспособности, близких к теме исследования, с целью выявления их преимуществ и недостатков.
+
+  Далее мы разработаем и обоснуем новый метод расчета функции конкурентоспособности, используя методы машинного обучения, ранжирование и анализ динамики спроса.
   
-  Затем мы разработаем и обоснуем новый метод расчета функции
-  конкурентоспособности, основанный на применении методов машинного
-  обучения, ранжировании и анализе динамики спроса.
+  Применяя наш метод к рейтингу видеокарт с платформы Steam за период с 2017 по 2024 год, мы восстановим функцию конкурентоспособности товаров.
   
-  Применяя наш метод к немецкому рынку центральных процессоров за период с
-  августа 2020 по апрель 2022 года, мы восстановим весовые коэффициенты,
-  чтобы выявить наиболее и наименее значимые характеристики товара.
-  
-  Затем определим значения функции конкурентоспособности для каждой
-  модели, чтобы оценить потенциальные позиции на рынке. В ходе
-  исследования мы продемонстрируем, что невозможно восстановить функцию
-  конкурентоспособности как линейную комбинацию.
-  
-  Наконец, мы решим задачу подбора оптимальных значений характеристик для
-  "начинающего"производителя с целью успешного введения нового процессора
-  на рынок.
+  После этого мы определим значения функции конкурентоспособности для каждой модели, чтобы оценить их потенциальные позиции на рынке. В ходе исследования мы покажем, что функция конкурентоспособности не может быть представлена как линейная комбинация.
 
   \newpage
 
@@ -168,7 +154,7 @@ bottom=2cm]{geometry}
   параметрам, выявить параметры, которые не соответствуют требованиям, и
   выделить те из них, которые сильнее всего отличаются от базовых.
 
-  \subsection{Дифференциальный метод оценки конкурентоспости}
+  \subsection{Дифференциальный метод оценки конкурентоспособности}
   \begin{enumerate}
     \item Если в качестве отправной точки для оценки используются стандартные показатели качества товаров, то расчет единичного показателя конкурентоспособности выполняется с применением следующей формулы:
     \[
@@ -215,11 +201,9 @@ bottom=2cm]{geometry}
      запаха), применяются экспертные методы оценки в баллах. В этом
      случае подвергают оценке в баллах как исследуемый образец, так и базовый.
   \paragraph[short]{}
-    Дифференциальный метод оценки конкурентоспособности ограничивается определением уровня конкурентоспособности по отдельному пока-
-     зателю. Он не учитывает важность каждого параметра, влияющего на
-     выбор товара потребителем. По этой причине дифференциальные методы оценки конкурентоспособности применяются обычно в двух сценари-
-     ях: при использовании степени удовлетворения потребности потребителя
-     и при оценке соответствия нормативнотехнологическим требованиям.
+  Дифференциальный метод оценки конкурентоспособности ограничивается определением уровня конкурентоспособности по отдельному показателю. Он не учитывает важность каждого параметра, влияющего на
+     выбор товара потребителем. По этой причине дифференциальные методы оценки конкурентоспособности применяются обычно в двух сценариях: при использовании степени удовлетворения потребности потребителя
+     и при оценке соответствия нормативно-технологическим требованиям.
   \end{enumerate}
   \newpage
   \subsection{Комплексный метод оценки конкурентоспособности}
@@ -272,7 +256,7 @@ bottom=2cm]{geometry}
   K = \frac{1}{C_0} \sum_{i=1}^n \alpha_i q_{ni}
   \]
   
-  Следовательно, интегральный показатель выражается в виде линейной функции его технических параметров. Однако такая оценка обладает рядом недостатков, например, коэффициенты \(\alpha\) основаны на данных, полученных из социологических опросов группы лиц, и не всегда отражают объективную реальность. Это может создать проблемы при корректности построении функции конкурентоспособности. С другой стороны, подход к оценке конкурентоспособности товаров, вдохновленный работами Кузнецова О.А., Морозова А.Ю., Кузнецовой Г.В., Рябовой Е.А., Гарсина А., подчеркивает сложность с приспособляемостью живых существ. В свете этих исследований становится ясным, что линейная модель не всегда является приемлемой для построения функции приспособляемости. Иногда необходим переход к сверткам более высоких порядков. Исходя из этого, мы переходим к разработке новой методологии.
+  Следовательно, интегральный показатель выражается в виде линейной функции его технических параметров. Однако такая оценка обладает рядом недостатков, например, коэффициенты \(\alpha\) основаны на данных, полученных из социологических опросов группы лиц, и не всегда отражают объективную реальность. Это может создать проблемы при корректности построении функции конкурентоспособности. С другой стороны, подход к оценке конкурентоспособности товаров, вдохновленный работами Кузенкова О.А., Морозова А.Ю., Кузенковой Г.В., Рябовой Е.А., Гарсиа А., подчеркивает сложность с приспособляемостью живых существ. В свете этих исследований становится ясным, что линейная модель не всегда является приемлемой для построения функции приспособляемости. Иногда необходим переход к сверткам более высоких порядков. Исходя из этого, мы переходим к разработке новой методологии.
   
   \section{Методика расчета конкурентоспособности}
 
@@ -306,23 +290,23 @@ bottom=2cm]{geometry}
   
   Общий объем спроса на рынке в момент \( t_k \) обозначим \( u(t_k) = \sum_{i=1}^l x(v_i, t_k) \). Эта величина может принимать различные значения в зависимости от \( t_k \), но при этом справедливы неравенства \( 0 < u_0 \leq u(t_k) \leq u_1 \), где \( u_0, u_1 \) – положительные константы – минимальное и максимальное значения общего объема спроса соответственно. Величина \( z(v_i, t_k) = \frac{x(v_i, t_k)}{u(t_k)} \) является удельным весом i-го товара на рынке в момент времени \( t_k \).
   
-  Итак \( z(v_i, t_k) \) удельный вес величины спроса i-го товара в момент времени \( t_k \), который вычисляется из статистических данных спроса. Время рассматриваем дискретное равновестию месяцы.
+  Итак \( z(v_i, t_k) \) удельный вес величины спроса i-го товара в момент времени \( t_k \), который вычисляется из статистических данных спроса. Время рассматриваем дискретное.
   
   \[
   \Delta z(v_i, t_0) = z(v_i, t_0 + (k+1)\Delta t) - z(v_i, t_0 + (k+1)\Delta t)
   \]
   
-  \noindent приряшения удельного веса величины спроса i-го товара. Как было показано характеристика спроса, которая так же является показателем конкурентоспособности вычисляется следующим способом:
+  \noindent Как было показано в работах О.А Кузенкова характеристика спроса, которая так же является показателем конкурентоспособности вычисляется следующим способом:
   
   \[
   J(v_i) =< ln(1+\frac{\Delta z(v_i, t_k)}{z(v_i, t_k)}) >= \frac{1}{n} \sum_{i=1}^n ln(1+\frac{\Delta z(v_i, t_k)}{z(v_i, t_k)})
-  \]
+  \](1.0)
   
   Сравнивая обнаруженные значения для каждого товара, можно выяснить, который из них более конкурентоспособен.
   
   Для каждой модели \( v \) динамика спроса \( x(v, t) \) определяется различными потребительскими, коммерческими и экономическими параметрами. Предположим, что общее количество таких параметров равно \( m \). Тогда этот набор можно представлять в виде вектора \( M(v) = (M_1(v), M_2(v), \ldots, M_m(v)) \). Конкурентоспособность \( J \) является функцией многих переменных от \( M(v) \), то есть \( J = J(M(v)) \).
   
-  Далее предположим, что функция \( J \) является бесконечно дифференцируемой по времени и достаточно гладкой функцией параметров \( M_i \). Таким образом, мы можем аппроксимировать \( J \) с использованием разложения Тейлора вокруг некоторой точки \( M_0 \). В частности, мы можем рассмотреть приближение функции приспособленности в классе линейных или квадратичных функций путем свертки параметров. Ранее уже было сказано, что на основе данной линейная свертка не всегда является уместной, поэтому в данной работе ключевая роль отводится квадратичной:
+  Далее предположим, что функция \( J \) является достаточно гладкой функцией параметров \( M_i \). Таким образом, мы можем аппроксимировать \( J \) с использованием разложения Тейлора вокруг некоторой точки \( M_0 \). В частности, мы можем рассмотреть приближение функции приспособленности в классе линейных или квадратичных функций путем свертки параметров. Ранее уже было сказано, что линейная свертка не всегда является уместной, поэтому в данной работе ключевая роль отводится сверткам более высоких порядков. В данном примере рассматривается квадратичная:
   
   \[
   J(M) = \sum_{i=1}^m \lambda_i M_i(v) + \sum_{i=1}^m \sum_{j=1}^m \lambda_{ij} M_i(v) M_j(v)
@@ -348,7 +332,7 @@ bottom=2cm]{geometry}
 
 Задача поиска параметра \( \lambda \) сводится к нахождению компонентов нормали гиперплоскости, разделяющей два множества точек. Эта задача сводится к бинарной классификации, которую можно легко решить с использованием специализированных методов машинного обучения. В частности, метод опорных векторов (SVM) хорошо зарекомендовал себя в таких задачах.
 
-Метод опорных векторов (SVM) принимает входные данные для двух классов и возращает коэффициенты разделяющей гиперплоскости. Основная цель алгоритма заключается в поиске оптимальной гиперплоскости, которая эффективно разделяет данные на два класса.
+Метод опорных векторов (SVM) принимает входные данные для двух классов и возвращает коэффициенты разделяющей гиперплоскости. Основная цель алгоритма заключается в поиске оптимальной гиперплоскости, которая эффективно разделяет данные на два класса.
 
 Алгоритм устроен таким образом, что он выявляет точки, расположенные ближе всего к гиперплоскости разделения, и такие точки называются опорными векторами. Затем алгоритм вычисляет расстояние между опорными векторами и самой разделяющей плоскостью, которое называется зазором. Основная задача алгоритма заключается в максимизации этого зазора.
 
@@ -397,481 +381,662 @@ bottom=2cm]{geometry}
   \textbf{Примеры популярных бенчмарков для GPU}\\
   В данной работе будут фигурировать характеристики основанные на двух популярных бенчмарках:
   \begin{enumerate}
+    \item\textbf{Vulkan} Специализированный тест на архитектуре Vulkan.
+    \item\textbf{OpenCV} Специализированный тест на архитектуре OpenCV.
     \item\textbf{3DMark} Один из самых популярных и универсальных бенчмарков, используемый для тестирования игровых и профессиональных видеокарт.
     \item\textbf{2DMark} Специализированный тест, который включает сценарии, моделирующие использование профессиональных графических приложений, таких как Adobe Illustrator или AutoCAD, для оценки производительности в 2D-графике.
   \end{enumerate}
-  Также рассматривается характеристика цены актуальная на момент сбора данных (февраль 2022г.) И метрика тепловыделения видеокатры (TDP). Однако так как все параметры должны положительно коррелировать с приспособленностью товара возьмем обратные величины. Далее везде будут использованны величины равные \(1/price\) и \(1/TDP\).
+  Также рассматривается характеристика цены актуальная на момент сбора данных (февраль 2022г.) И метрика тепловыделения видеокарты (TDP). Однако так как все параметры должны положительно коррелировать с приспособленностью товара возьмем обратные величины. Далее везде будут использованы величины равные \(1/price\) и \(1/TDP\).
+  
+  \paragraph{}
+  Данные приведены в приложении (2).
+  \paragraph{}
+  Эти данные разделим на тренировочные и тестовые в пропорции 70 на 30. В дальнейшем все восстановление функции происходит на тренировочных данных. На тестовых проверяется результат.
+
   \newpage
-  \section{Востановление функции конкурентоспособности с помощью линейных параметров.}
-Для начала взглянем на матрицу корреляции наших параметров:
+  \section{Восстановление функции конкурентоспособности с помощью линейных параметров.}
+Для начала взглянем на графическое представление наших данных:
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{example-image}
-  \caption{Пример изображения.}
+  \includegraphics[width=0.8\textwidth]{./img/linear/graph-data.png}
+  \caption{Динамика рынка GPU (2017-2024гг).}
   \label{fig:example}
 \end{figure}
+\newline
+На данном графике можно увидеть типичные ситуации вытеснения товаров на рынке, что характерно для нашей теории.
+\newpage
+Далее посмотрим на матрицу корреляции линейных характеристик и параметра J высчитанного по формуле 1.0.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./img/linear/corr.png}
+  \caption{Матрица корреляции характеристик.}
+  \label{fig:example}
+\end{figure}
+\newline
+Как мы можем увидеть корреляция между параметрами достаточно высокая. Значение посчитанной конкурентоспособности достаточно сильно коррелирует с остальными параметрами, что дает надежду на лучшее восстановление. Однако, для машинного обучения сильная корреляция губительна. Для того чтобы перейти к следующему этапу
+необходимо избавиться от нее. С данной задачей может справиться метод главных компонент (PSA).
+\paragraph{}
+Перейдем непосредственно к решению. В дальнейшем мы будем работать со стандартизированными данными. Для этого для каждой характеристики посчитаем среднее выборочное (Мат. Ожидание) и среднеквадратичное отклонение.
+После чего найдем стандартизированные значения характеристик по формуле:
+\[
+  z_i = \frac{x_i - \mu}{\sigma}
+\]
+
+
+\textbf{Mетод главных компонент.} Применяя для новых данных метод главных компонент получим преобразованные данные и матрицу коэффициентов метода главных компонент, обозначим ее {W}.
+\newline
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./img/linear/w-matrix.png}
+  \caption{Матрица W.}
+  \label{fig:example}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./img/linear/psacorr.png}
+  \caption{Матрица корреляции в главных компонентах.}
+  \label{fig:example}
+\end{figure}
+\paragraph{}
+
+Корреляция в главных компонентах отсутствует. Можно переходить к машинному обучению.
+\paragraph{}
+
+\textbf{Mашинное обучение.} Для решения задачи регрессии будем исследовать всевозможные пары объектов. Для начала сравним их и разделим на классы по принципу описанному выше. Если посчитанная конкурентоспособность объекта А больше чем у объекта В то отнесем их к 1-му классу. Если меньше то ко 2-му.
+Также исключим граничные случаи. Для этого введем параметр \(\mathcal{E}\). Если \(\left|J_i - J_j\right| < \mathcal{E}\) то пара \(i, j\)
+не участвует в обучении. 
+\newpage
+\paragraph{}
+Далее для каждой пары объектов найдем метрики обучения. Данные метрики будут представлять собой разности между значениями главных компонент.
+\[
+  M^k_{ij} = C_{i}^{k} - C_{j}^{k},  k = 1, ... , n
+\]
+Где \(n\) - количество главных компонент.
+\paragraph{}
+Для реализации будем использовать метод опорных векторов (SVM). Результатом работы данного алгоритма будут коэффициенты разделяющей гиперплоскости. Обозначим их как вектор V. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./img/linear/vectorv.png}
+  \caption{Вектор V.}
+  \label{fig:example}
+\end{figure}
+\paragraph{}
+Данные коэффициенты задают гиперплоскость в пространстве опорных векторов. Для того чтобы перейти к пространству начальных характеристик умножим данный вектор слева на матрицу W.
+Получим вектор коэффициентов начальных характеристик. Обозначим его C.
+\[
+  C = W \times V
+\]
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./img/linear/vectorc.png}
+  \caption{Вектор C.}
+  \label{fig:example}
+\end{figure}
+\paragraph{}
+Данные коэффициенты являются коэффициентами восстановленной функции конкурентоспособности. Сама функция выглядит следующим образом:
+\[
+  J = \sum_{i=1}^n C_i \frac{N_i - \mu_i}{\sigma_i}
+\]
+\(N_i\) - значение i-ой характеристики
+\newline
+\(\mu_i\) - значение мат ожидания посчитанного на обучающих данных.
+\newline
+\(\sigma_i\) - значение среднеквадратичного отклонения посчитанного на обучающих данных.
+\newline
+\(C_i\) - i-й восстановленный коэффициент.
+\newpage
+\textbf{Тестирование.} Тестирование восстановленной функции будет происходить на тестовых данных.
+Для этого возьмем данные в порядке уменьшения посчитанной конкурентоспособности и посчитаем значение восстановленной функции для этих объектов.
+Далее два списка объектов (отсортированные по посчитанной и восстановленной функции) будут сравниваться друг с другом.
+\paragraph{}
+\textbf{Алгоритм сравнения.} Значение данного теста будет число $t \in [0, 1]$ которое обладает следующими свойствами:
+\begin{enumerate}
+  \item\textbf{При t = 0} Объекты идут в обратном порядке.
+  \item\textbf{При $t \in (0, 0.5)$} Большинство объектов соблюдает обратный порядок.
+  \item\textbf{При $t = 0.5$} Объекты идут в случайном порядке.
+  \item\textbf{При $t \in (0.5, 1)$} Большинство объектов соблюдает порядок.
+  \item\textbf{При t = 1} Порядок полностью соблюдается.
+\end{enumerate}
+\paragraph{}
+Чем ближе число t к 1 тем лучше восстановлена динамика данных.
+\paragraph{}
+Для функции с характеристиками взятыми линейно t = 0.6, что говорит о плохом восстановлении функции. Как раньше говорилось в описании метода такой результат может быть связан с нелинейным влиянием характеристик на конкурентоспособность товара.
+\newline
+\section{Увеличение размерности.}
+Для дальнейшей реализации алгоритма предлагается оптимизировать обучающую выборку. Для этого введем алгоритм восстановления:
+
+Параметры алгоритма:
+\begin{enumerate}
+  \item\textbf{\(\mathcal{E}\)} -- Параметр контролирующий минимальную разницу между посчитанными значениями функции конкурентоспособности чтобы это сравнение вошло в выборку. 
+  \item\textbf{Z (мес.)} -- Параметр минимального времени нахождения товара на рынке. (Если товар находится на рынке меньше Z месяцев товар не участвует в обучении)
+  \item\textbf{D (dimention)} -- Порядок вхождения параметров.
+\end{enumerate}
+\paragraph{}
+\begin{enumerate}
+    \item На основании параметра D для каждого объекта берутся всевозможные произведения характеристик порядка от 1 до D. Эти значения становится новыми характеристиками.
+    \item На основании параметра Z выбираются объекты выборки находящиеся на рынке не менее Z месяцев, которые становятся новой обучающей выборкой.
+    \item К данной выборке применяется метод главных компонент. Количество главных компонент равно количеству характеристик.
+    \item Составляется обучающая выборка машинного обучения состоящая из пар объектов. Однако на основании параметра E если разница между значениями конкурентоспособности меньше E то пара не попадает в выборку.
+    \item Происходит восстановление параметров \(\lambda\). И тестирование на обучающей выборке. Значение вышеприведенного теста (t) является выходным параметром метода.
+\end{enumerate}
+\paragraph{}
+Далее предлагается используя алгоритм оптимизации (в данной работе будет использоваться алгоритм дифференциальной эволюции) найти максимум данной функции. 
+\paragraph{}
+\textbf{Результаты работы алгоритма оптимизации на приведенных данных: \(\mathcal{E}\) = 0.002, Z = 28, D = 4. Значение теста на обучающей выборке 0.72.}
+\paragraph{}
+Далее необходимо проверить результат на тестовой выборке.
+\paragraph{}
+Значение на тестовой выборке \textbf{0.805.} Данный результат говорит о хорошем восстановлении функции.
+
+\paragraph{}
+Посчитанные коэффициенты функции находятся в приложении 3 к данной работе.
+\paragraph{}
+\section{Тестирование на реальном примере.}
+Возьмем некоторую видеокарту которая не участвовала в обучении и посчитаем ее конкурентоспособность.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/linear/test_gpu.png}
+    \caption{Тестовая GPU и ее посчитанная конкурентоспособность.}
+    \label{fig:example}
+  \end{figure}
+\paragraph{}
+Далее посмотрим на ее поведение в некоторой части тестовой выборки отсортированной по значению функции.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/linear/test_calc.png}
+    \caption{Тестовая GPU в выборке. Посчитанная конкурентоспособность.}
+    \label{fig:example}
+  \end{figure}
+\paragraph{}
+\newpage
+Далее для сравнения посчитаем значение конкурентоспособности по восстановленной функции и отсортируем данные по уменьшению значения.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/linear/test_restored.png}
+    \caption{Тестовая GPU в выборке. Восстановленная конкурентоспособность.}
+    \label{fig:example}
+\end{figure}
+\paragraph{}
+Значение t на данной выборке 85.5\%. Поведение видеокарты на рынке восстановилось достаточно хорошо. Порядок предпочтительности соблюдается. Это позволяет сказать что на основании данной восстановленной функции конкурентоспособности можно с неплохой точностью и на основании доступных данных показать динамику рынка GPU.
+\newpage
+\section{Возможные применения.}
+Для производителей GPU функция конкурентоспособности несомненно имеет множество полезных применений:
+\begin{enumerate}
+  \item\textbf{Стратегическое планирование}
+  \subitem Анализ рынка: Функция предоставляет данные для стратегического анализа рынка, выявления новых возможностей и угроз.
+  \subitem Долгосрочное планирование: Помогает в разработке долгосрочных планов по развитию линейки продуктов и технологий.
+  \item\textbf{Ценообразование}
+  \subitem Определение оптимальной цены: Анализ конкурентоспособности помогает определить справедливую цену для нового продукта, учитывая его производительность по сравнению с продуктами конкурентов.
+  \item\textbf{Оптимизация продуктов}
+  \subitem Анализ производительности: Производители могут использовать функцию для анализа производительности своих GPU в сравнении с конкурентами. Это помогает выявить слабые и сильные стороны продукта.
+  \subitem Таргетирование улучшений: На основе данных о конкурентоспособности можно принять решения о том, какие аспекты GPU требуют улучшения (например, производительность в играх, вычислительные мощности для ИИ, энергоэффективность).
+
+\end{enumerate}
+\newpage
+\section{Заключение}
+
+В заключение, проведенное исследование продемонстрировало эффективность методов машинного обучения в выявлении функции конкурентоспособности на основе динамики спроса. Анализ существующих экономических методик позволил выделить ключевые преимущества и недостатки, что послужило основой для разработки нового метода расчета функции конкурентоспособности.
+
+Применение предложенного метода к рейтингу видеокарт с платформы Steam за период с 2017 по 2024 год позволило успешно восстановить функцию конкурентоспособности и определить её значения для каждой модели. Результаты исследования подтвердили, что функция конкурентоспособности не может быть представлена как линейная комбинация, что подчеркивает сложность и многогранность факторов, влияющих на конкурентоспособность товаров.
+
+Таким образом, данная работа вносит значимый вклад в развитие методов оценки конкурентоспособности и открывает новые возможности для применения машинного обучения в экономическом анализе. Полученные результаты могут быть полезны как для научных исследований, так и для практического применения в стратегическом планировании и маркетинговых исследованиях.
 \newpage
 
-  \section{Приложение}
-\subsection{Исходный код c++}
-  \subsubsection{Последовательная реализация}
+\section{Приложение}
+\subsection{Исходный код Python}
+  \subsubsection{main.py}
   \begin{lstlisting}
+    import sys
+from matplotlib import pyplot as plt
+import pandas as pd
+import seaborn as sns
+import numpy as np
 
-int orientation(Point p, Point q, Point r) {
-  int val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
-  if (val == 0) return 0;    // Collinear
-  return (val > 0) ? 1 : 2;  // Clockwise or Counterclockwise
-}
+from common.data import GetData, GetTest
+from sklearn.decomposition import PCA
 
-std::vector<Point> get_convex_hull(const std::vector<Point>& points) {
-  int n = points.size();
-  if (n < 3) return std::vector<Point>();
+from sklearn import svm
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.datasets import load_iris
+from sklearn.metrics import confusion_matrix
+from colorama import Fore
+from scipy.optimize import differential_evolution
 
-  std::vector<Point> hull;
 
-  int l = 0;
-  for (int i = 1; i < n; i++) {
-    if (points[i].x < points[l].x) {
-      l = i;
-    }
-  }
 
-  int p = l;
-  int q;
-  do {
-    hull.push_back(points[p]);
-    q = (p + 1) % n;
-    for (int i = 0; i < n; i++) {
-      if (orientation(points[p], points[i], points[q]) == 2) {
-        q = i;
-      }
-    }
 
-    p = q;
-  } while (p != l);
-  return hull;
-}
 
+ZERO_NUM = 0
+ERROR = 0.0
+DIM = 0
+
+
+
+class DataManager:
+    data = GetData(ZERO_NUM, DIM)
+    test = GetTest(ZERO_NUM, DIM)
+    
+    @classmethod
+    def get_statistic_df(cls):
+        res = pd.DataFrame([dict(i.get_stats()) for i in cls.data]).T
+        res.columns = [i.get_name() for i in cls.data]
+        return res
+
+    @classmethod
+    def get_metrics_df(cls):
+        return pd.DataFrame([i.get_metrics() for i in cls.data])
+
+    @classmethod
+    def get_united_metrics_df(cls):
+        return pd.DataFrame([i.get_united_metrics() for i in cls.data])
+
+    @classmethod
+    def get_united_metrics_val(cls):
+        return np.array([i.get_united_metrics().values() for i in cls.data])
+
+    @classmethod
+    def calculate_J_val(cls, c_array, mean, std):
+        res = []
+        for gpu_ in cls.data:
+            metrics = list(gpu_.get_united_metrics().values())
+            sum = 0
+            for metr_, _ in enumerate(metrics):
+                sum+= c_array[metr_]*((metrics[metr_] - mean[metr_])/std[metr_])
+            res.append((sum, gpu_.get_Jval()))
+        return res
+
+    @classmethod
+    def get_united_metric_names(cls):
+        return pd.DataFrame(cls.data[0].get_united_metrics().keys())
+
+    @classmethod
+    def get_classification_df(cls):
+        classification_table = []
+        for i in [(gpu.get_name(), gpu.get_Jval()) for gpu in cls.data]:
+            row = [i[0]]
+            for j in [(gpu.get_name(), gpu.get_Jval()) for gpu in cls.data]:
+                if j[0] == i[0]:
+                    row.append(0)
+                    continue
+                if i[1] > j[1]:
+                    row.append(-1)
+                else:
+                    row.append(1)
+            classification_table.append(row)
+        classificationDF = pd.DataFrame(classification_table, columns=['name']+[gpu.get_name() for gpu in cls.data])
+        return classification_table
+    
+    @classmethod
+    def get_training_Y(cls):
+        res = []
+        gpu_vals = [gpu.get_Jval() for gpu in cls.data]
+        gpu_n = len(gpu_vals)
+        for i in range(gpu_n):
+            for j in range(gpu_n):
+                if abs(gpu_vals[i] - gpu_vals[j]) > ERROR:
+                    if j == i:
+                        pass
+                    elif gpu_vals[i] > gpu_vals[j]:
+                        res.append(1)
+                    elif gpu_vals[i] <= gpu_vals[j]:
+                        res.append(-1)
+        return res
+    
+    @classmethod
+    def get_training_X(cls, pca_data):
+        pca_data = np.array(pca_data)
+        res = []
+        gpu_n = len(pca_data)
+        metric_n = len(pca_data[0])
+        for i in range(gpu_n):
+            for j in range(gpu_n):
+                if abs(cls.data[i].get_Jval() - cls.data[j].get_Jval()) > ERROR:
+                    if j == i:
+                        pass
+                    else:
+                        row = []
+                        for k in range(metric_n):
+                                row.append(pca_data[i][k] - pca_data[j][k])
+                        res.append(row)
+        return res
+    
+    @classmethod
+    def testing(cls, c_array, mean, std):
+        res1 = []
+        for gpu_ in cls.test:
+            metrics = list(gpu_.get_united_metrics().values())
+            sum = 0
+            for metr_, _ in enumerate(metrics):
+                sum+= c_array[metr_]*((metrics[metr_] - mean[metr_])/std[metr_])
+            res1.append((sum, gpu_.get_name()))
+        res1.sort(key= lambda x: x[0])
+
+        res=[]
+        for gpu_ in cls.test:
+            res.append((gpu_.get_Jval(), gpu_.get_name()))
+        res.sort(key= lambda x: x[0])
+        s = 0
+        
+        for i in range(len(res)-1):
+            k=-1
+            for j in range(len(res1)):
+                if res1[i][1] == res[j][1]:
+                    k = j
+                if res[i+1][1] == res1[j][1] and k!=-1:
+                    s+=1
+        print(f"TESTING ACCURACY: {s/len(cls.test)} ZERO_NUM: {ZERO_NUM}, ERROR: {ERROR}, DIM: {DIM}")
+        return s/len(cls.test)
+
+class myPSA:
+    def __init__(self, df) -> None:
+        data_scaled = np.array(df)
+        self.data_scaled = data_scaled
+        n_components = min(len(data_scaled[0]), len(data_scaled))
+        print(f"Optimal number of components: {n_components}")
+        pca = PCA(n_components=n_components)
+        self.data_pca = pca.fit_transform(data_scaled)
+        self.components = pca.components_
+
+    def get_new_data(self):
+        return pd.DataFrame(self.data_pca)
+
+    def get_components(self):
+        return self.components
+
+
+class Regression:
+    def __init__(self, data) -> None:
+        classification_X = DataManager.get_training_X(data)
+        classification_Y = DataManager.get_training_Y()
+        
+        
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(classification_X, classification_Y, test_size=0.01, random_state=0)
+        clf = svm.SVC(kernel='linear')
+        clf.fit(classification_X, classification_Y)
+        y_pred = clf.predict(self.X_test)
+        self.coefficients = clf.coef_
+
+        self.accuracy = accuracy_score(self.y_test, y_pred)
+
+    def get_coefficients(self):
+        return self.coefficients
+
+
+class PicturesGenerator:
+    @staticmethod
+    def get_df_plot(df):
+        df.plot(logy=False, legend=False)
+        plt.show()
+        
+    @staticmethod
+    def get_df_corr_matrix(df):
+        corr = df.corr()
+        sns.heatmap(corr, annot=True, cmap='vlag',
+                xticklabels=corr.columns.values,
+                yticklabels=corr.columns.values)
+        plt.show()
+
+
+
+class UIController:
+    @staticmethod
+    def show_graphs():
+        statsDF = DataManager.get_statistic_df()
+        PicturesGenerator.get_df_plot(statsDF)
+
+        metricsDF= DataManager.get_metrics_df()
+        PicturesGenerator.get_df_corr_matrix(metricsDF)
+
+        metricsDF= DataManager.get_united_metrics_df()
+        PicturesGenerator.get_df_corr_matrix(metricsDF) 
+
+def array_s(a):
+    res = []
+    for i in a[0]:
+        if i < 0:
+            res.append(0)
+        else:
+            res.append(i)
+    return res
+def execute(h):
+    global ZERO_NUM
+    global ERROR
+    global DIM
+    ZERO_NUM = h[0]
+    ERROR = h[1]
+    DIM = h[2]
+    DataManager.data = GetData(ZERO_NUM, DIM)
+    DataManager.test = GetTest(ZERO_NUM, DIM)
+    metricsDF= DataManager.get_united_metrics_df()
+    scaledMetricsDF = (metricsDF - metricsDF.mean()) / metricsDF.std()
+    psa = myPSA(scaledMetricsDF)
+    NewData = psa.get_new_data()
+    svm = Regression(NewData)
+    CompCoeff = psa.get_components()
+    SvmCoeff = svm.get_coefficients()
+    coefArray = np.abs(np.dot(SvmCoeff, CompCoeff))
+    print(coefArray)
+    s = pd.DataFrame(coefArray, columns=DataManager.data[0].get_united_metrics().keys())
+    print(s)
+    coefArray = coefArray[0]
+    mean = list(metricsDF.mean())
+    std = list(metricsDF.std())
+    s = DataManager.calculate_J_val(coefArray, mean, std)
+    s.sort(key=lambda x: x[1])
+    return 1/DataManager.testing(coefArray, mean, std)
+    
+    
+if __name__ == '__main__':
+    print(differential_evolution(execute, bounds=[(0,80), (0, 0.03), (0,4)]))
   \end{lstlisting}
-  \newpage
-  \subsubsection{OMP}
+  \subsubsection{data.py}
   \begin{lstlisting}
-point_orientation orientation(Point p, Point q, Point r) {
-  int val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
-  if (val == 0) return point_orientation::colliniar;
-  return (val > 0) ? point_orientation::clockwise
-                   : point_orientation::counterclockwsise;
-}
-
-double dist2(Point a, Point b) {
-  int dx = b.x - a.x;
-  int dy = b.y - a.y;
-  return dx * dx + dy * dy;
-}
-
-std::vector<Point> get_convex_hull_omp(const std::vector<Point>& points) {
-  int n = points.size();
-  if (n < 3)
-    return std::vector<Point>();
-  else if (n == 3)
-    return std::vector<Point>(points);
-
-  std::set<Point> hull;
-
-  int start = 0;
-  for (int i = 1; i < n; i++) {
-    if (points[i] < points[start]) {
-      start = i;
-    }
-  }
-  int current = start;
-  int next;
-  std::vector<int> to_push_by_each_thread;
-#pragma omp parallel shared(start, next, current, n)
-  {
-    while (true) {
-#pragma omp single
-      { next = (current + 1) % n; }
-      int private_next = next;
-      bool was_used = false;
-#pragma omp for
-      for (int i = 0; i < n; ++i) {
-        if (orientation(points[current], points[private_next], points[i]) ==
-            point_orientation::counterclockwsise) {
-          private_next = i;
-          was_used = true;
-        }
-      }
-#pragma omp critical
-      {
-        if (was_used) {
-          to_push_by_each_thread.push_back(private_next);
-        }
-      }
-#pragma omp barrier
-#pragma omp single
-      {
-        for (int i = 0; i < to_push_by_each_thread.size(); ++i) {
-          if (orientation(points[current], points[next],
-                          points[to_push_by_each_thread[i]]) ==
-                  point_orientation::counterclockwsise ||
-              orientation(points[current], points[next],
-                          points[to_push_by_each_thread[i]]) ==
-                      point_orientation::colliniar &&
-                  dist2(points[current], points[next]) <
-                      dist2(points[current],
-                            points[to_push_by_each_thread[i]])) {
-            next = to_push_by_each_thread[i];
-          }
-        }
-        to_push_by_each_thread.clear();
-        for (int i = 0; i < n; i++) {
-          if (orientation(points[current], points[next], points[i]) ==
-              point_orientation::colliniar) {
-            hull.insert(points[i]);
-          }
-        }
-        current = next;
-      }
-      if (next == start) {
-        break;
-      }
-#pragma omp barrier
-    }
-  }
-  return std::vector<Point>(hull.begin(), hull.end());
-}
+    from dataclasses import dataclass, asdict
+    from typing import List
+    from math import log
+    from os.path import join, abspath
+    from os import getcwd
+    
+    
+    import numpy as np
+    DIM = 0
+    
+    
+    @dataclass
+    class Metrics:
+        Opencl: float
+        Vulkan: float
+        G3: float
+        G2: float
+        # reciprocal value 1/val
+        RP: float
+        RTDP: float
+    
+    
+    @dataclass   
+    class Stats:
+        stats_list : List
+    
+    
+    class GPU:
+        name: str
+        stat: list
+        metrics: Metrics
+    
+        def __init__(self, _name, _stat, _metr:Metrics) -> None:
+            self.name = _name
+            self.stat = _stat
+            self.metrics = _metr
+            self._2d_metrics = self.get_2d_metrics()
+            self._3d_metrics = self.get_3d_metrics()
+    
+        def get_metrics(self) -> dict:
+            return asdict(self.metrics)
+        
+        def get_3d_metrics(self) -> dict:
+            res = {}
+            i = 0
+            for keya, vala in asdict(self.metrics).items():
+                i+=1
+                j=0
+                for keyb, valb in asdict(self.metrics).items():
+                    j+=1
+                    k = 0
+                    for keyc, valc in asdict(self.metrics).items():
+                        k+=1
+                        if j >= i and k >= j and k >= i:
+                            res[f"{keya}*{keyb}*{keyc}"] = vala*valb*valc
+            return res
+        
+        def get_4d_metrics(self) -> dict:
+            res = {}
+            i = 0
+            for keya, vala in asdict(self.metrics).items():
+                i+=1
+                j=0
+                for keyb, valb in asdict(self.metrics).items():
+                    j+=1
+                    k = 0
+                    for keyc, valc in asdict(self.metrics).items():
+                        k+=1
+                        m = 0
+                        for keyd, vald in asdict(self.metrics).items():
+                            m+=1
+                            if j >= i and k >= j and m >= k:
+                                res[f"{keya}*{keyb}*{keyc}*{keyd}"] = vala*valb*valc*vald
+            return res
+        
+        def get_5d_metrics(self) -> dict:
+            res = {}
+            i = 0
+            for keya, vala in asdict(self.metrics).items():
+                i+=1
+                j=0
+                for keyb, valb in asdict(self.metrics).items():
+                    j+=1
+                    k = 0
+                    for keyc, valc in asdict(self.metrics).items():
+                        k+=1
+                        m = 0
+                        for keyd, vald in asdict(self.metrics).items():
+                            m+=1
+                            n=0
+                            for keye, vale in asdict(self.metrics).items():
+                                n+=1
+                                if j >= i and k >= j and m >= k:
+                                    res[f"{keya}*{keyb}*{keyc}*{keyd}*{keye}"] = vala*valb*valc*vald*vale
+            return res
+        
+        
+        def get_2d_metrics(self) -> dict:
+            res = {}
+            i = 0
+            for keya, vala in asdict(self.metrics).items():
+                i+=1
+                j = 0
+                for keyb, valb in asdict(self.metrics).items():
+                    j+=1
+                    if j <= i:
+                        res[f"{keya}*{keyb}"] = vala*valb
+            return res
+        
+        def get_stats(self) -> dict:
+            return {i : self.stat[i] for i, _ in enumerate(self.stat)}
+    
+        def get_name(self):
+            return self.name
+        
+        def get_united_metrics(self) -> dict:
+            s = {}
+            s.update(asdict(self.metrics))
+            if DIM > 1:
+                s.update(self.get_2d_metrics())
+            if DIM > 2:
+                s.update(self.get_3d_metrics())
+            if DIM > 4:
+                s.update(self.get_5d_metrics())
+                
+            return s
+        
+        def get_Jval(self) -> float:
+            stats_arr = self.stat
+            res = 0
+            start_flag = False
+            n = 0
+            for i in range(len(stats_arr)):
+                if stats_arr[i] != 0:
+                    start_flag = True
+                if not start_flag:
+                    continue
+                if i == 0: continue
+                if stats_arr[i] and stats_arr[i-1]:
+                    res += log(1 + ((stats_arr[i]-stats_arr[i-1])/stats_arr[i-1]))
+                n+=1
+            return res/n + 2
+    
+    
+    
+    
+    def GetData(zero_num, dim):
+        global DIM
+        DIM = dim
+        with open(join(abspath(join(__file__, '..')), 'ndata.csv'), 'r') as data:
+            lines = data.readlines()
+        
+        res = []
+        for line in lines[1:]:
+            line = line[:-1]
+            spl = line.split(',')
+            if spl.count("0") < zero_num:
+                res.append(line)
+        print(f"len 1 = {len(lines)} len = {len(res)}")
+        lines = res
+        res_gpu = []
+        sum_array = [0 for _ in range(80)]
+        for line in lines:
+            spl = line.split(',')
+            metr = Metrics(float(spl[1]), float(spl[2]), float(spl[3]), float(spl[4]), 1/float(spl[5]), 1/float(spl[6]))
+            stat = [float(i) for i in spl[7:]]
+            res_gpu.append(GPU(spl[0], stat, metr))
+        return res_gpu
+    
+    def GetTest(zero_num, dim):
+        global DIM
+        DIM = dim
+        with open(join(abspath(join(__file__, '..')), 'ndata.csv'), 'r') as data:
+            lines = data.readlines()
+        res = []
+        for line in lines[1:]:
+            line = line[:-1]
+            spl = line.split(',')
+            res.append(line)
+        print(f"TEST len 1 = {len(lines)} len = {len(res)}")
+        
+        lines = res
+        res_gpu = []
+        for line in lines:
+            spl = line.split(',')
+            metr = Metrics(float(spl[1]), float(spl[2]), float(spl[3]), float(spl[4]), 1/float(spl[5]), 1/float(spl[6]))
+            stat = [float(i) for i in spl[7:]]
+            res_gpu.append(GPU(spl[0], stat, metr))
+        return res_gpu
   \end{lstlisting}
-  \newpage
-    \subsubsection{TBB}
-  \begin{lstlisting}
-
-point_orientation orientation(const Point& p, const Point& q, const Point& r) {
-  int val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
-  if (val == 0) return point_orientation::colliniar;
-  return (val > 0) ? point_orientation::clockwise
-                   : point_orientation::counterclockwsise;
-}
-
-double dist2(const Point& a, const Point& b) {
-  int dx = b.x - a.x;
-  int dy = b.y - a.y;
-
-  return dx * dx + dy * dy;
-}
-
-struct MyFunctor {
-  int current;
-  int next;
-  const std::vector<Point>& points;
-  MyFunctor(const std::vector<Point>& input, int next, int current)
-      : next(next), current(current), points(input) {}
-  MyFunctor(const MyFunctor& other, tbb::split)
-      : next(other.next), current(other.current), points(other.points) {}
-  void operator()(const tbb::blocked_range<int>& r) {
-    for (int i = r.begin(); i != r.end(); ++i) {
-      if (orientation(points[current], points[next], points[i]) ==
-          point_orientation::counterclockwsise) {
-        next = i;
-      }
-    }
-  }
-  void join(const MyFunctor& other) {
-    if (orientation(points[current], points[next], points[other.next]) ==
-            point_orientation::counterclockwsise ||
-        orientation(points[current], points[next], points[other.next]) ==
-                point_orientation::colliniar &&
-            dist2(points[current], points[next]) <
-                dist2(points[current], points[other.next])) {
-      next = other.next;
-    }
-  }
-};
-
-std::vector<Point> get_convex_hull_tbb(const std::vector<Point>& points) {
-  int n = points.size();
-  if (n < 3)
-    return std::vector<Point>();
-  else if (n == 3)
-    return std::vector<Point>(points);
-
-  std::set<Point> hull;
-  int start = 0;
-  for (int i = 1; i < n; i++) {
-    if (points[i] < points[start]) {
-      start = i;
-    }
-  }
-  int current = start;
-  int next;
-  while (true) {
-    next = (current + 1) % n;
-    MyFunctor temp(points, next, current);
-    tbb::parallel_reduce(tbb::blocked_range<int>(0, n), temp);
-    next = temp.next;
-    for (int i = 0; i < n; i++) {
-      if (orientation(points[current], points[next], points[i]) ==
-          point_orientation::colliniar) {
-        hull.insert(points[i]);
-      }
-    }
-    current = next;
-    if (next == start) {
-      break;
-    }
-  }
-  return std::vector<Point>(hull.begin(), hull.end());
-}
-
-  \end{lstlisting}
-  \newpage
-    \subsubsection{std::thread}
-  \begin{lstlisting}
-
-point_orientation orientation(const Point& p, const Point& q, const Point& r) {
-  int val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
-  if (val == 0) return point_orientation::colliniar;
-  return (val > 0) ? point_orientation::clockwise
-                   : point_orientation::counterclockwsise;
-}
-
-double dist2(const Point& a, const Point& b) {
-  int dx = b.x - a.x;
-  int dy = b.y - a.y;
-  return dx * dx + dy * dy;
-}
-
-void thread_func(int begin, int end, int current,
-                 const std::vector<Point>& points, int* per_thread_next) {
-  for (int i = begin; i < end; ++i) {
-    if (orientation(points[current], points[*per_thread_next], points[i]) ==
-        point_orientation::counterclockwsise) {
-      *per_thread_next = i;
-    }
-  }
-}
-
-std::vector<Point> get_convex_hull_std(const std::vector<Point>& points,
-                                       int thread_num) {
-  int n = points.size();
-  if (n < 3)
-    return std::vector<Point>();
-  else if (n == 3)
-    return std::vector<Point>(points);
-
-  std::set<Point> hull;
-  std::vector<int> per_thread_next(thread_num, -1);
-  int start = 0;
-  for (int i = 1; i < n; i++) {
-    if (points[i] < points[start]) {
-      start = i;
-    }
-  }
-  int current = start;
-  int next;
-  while (true) {
-    std::vector<std::thread> threads;
-    next = (current + 1) % n;
-    std::fill(per_thread_next.begin(), per_thread_next.end(), next);
-    for (uint64_t i = 0; i < thread_num; ++i) {
-      int operations_per_thread = (n + thread_num - 1) / thread_num;
-      threads.push_back(
-          std::thread(thread_func, operations_per_thread * i,
-                      std::min(operations_per_thread * (i + 1), uint64_t(n)),
-                      current, std::ref(points), &per_thread_next[i]));
-    }
-    for (uint64_t i = 0; i < thread_num; ++i) {
-      threads[i].join();
-    }
-    for (uint64_t i = 0; i < thread_num; ++i) {
-      if (orientation(points[current], points[next],
-                      points[per_thread_next[i]]) ==
-              point_orientation::counterclockwsise ||
-          orientation(points[current], points[next],
-                      points[per_thread_next[i]]) ==
-                  point_orientation::colliniar &&
-              dist2(points[current], points[next]) <
-                  dist2(points[current], points[per_thread_next[i]])) {
-        next = per_thread_next[i];
-      }
-    }
-
-    for (int i = 0; i < n; i++) {
-      if (orientation(points[current], points[next], points[i]) ==
-          point_orientation::colliniar) {
-        hull.insert(points[i]);
-      }
-    }
-    current = next;
-    if (next == start) {
-      break;
-    }
-  }
-  return std::vector<Point>(hull.begin(), hull.end());
-}
-\end{lstlisting}
-
-\subsection{Тесты последовательной реализации }
-
-\begin{lstlisting}
-TEST(convex_hull_test, return_empty_vector) {
-  std::vector<Point> input;
-  input.push_back(Point(1, 0));
-  input.push_back(Point(1, 2));
-  auto output = get_convex_hull(input);
-  EXPECT_EQ(output.size(), 0);
-}
-
-TEST(convex_hull_test, hull_of_three_points) {
-  std::vector<Point> input;
-  input.push_back(Point(1, 0));
-  input.push_back(Point(1, 2));
-  input.push_back(Point(1, 3));
-  auto output = get_convex_hull(input);
-  std::sort(input.begin(), input.end());
-  std::sort(output.begin(), output.end());
-  EXPECT_TRUE(output[0] == output[0]);
-  EXPECT_TRUE(output[1] == output[1]);
-  EXPECT_TRUE(output[2] == output[2]);
-}
-
-TEST(convex_hull_test, hull_of_five_points) {
-  std::vector<Point> input;
-  input.push_back(Point(-1, 0));
-  input.push_back(Point(0, 1));
-  input.push_back(Point(0, -1));
-  input.push_back(Point(1, 0));
-  input.push_back(Point(0, 0));
-  auto output = get_convex_hull(input);
-  std::cout << output.size() << std::endl;
-  std::sort(output.begin(), output.end());
-  EXPECT_EQ(output.size(), 4);
-  EXPECT_TRUE(output[0] == Point(-1, 0));
-  EXPECT_TRUE(output[1] == Point(0, -1));
-  EXPECT_TRUE(output[2] == Point(0, 1));
-  EXPECT_TRUE(output[3] == Point(1, 0));
-}
-
-TEST(convex_hull_test, collinear_points) {
-  std::vector<Point> input;
-  input.push_back(Point(0, 0));
-  input.push_back(Point(0, 4));
-  input.push_back(Point(4, 0));
-  input.push_back(Point(1, 1));
-  input.push_back(Point(2, 2));
-  auto output = get_convex_hull(input);
-  std::sort(output.begin(), output.end());
-  EXPECT_EQ(output.size(), 3);
-  EXPECT_TRUE(output[0] == Point(0, 0));
-  EXPECT_TRUE(output[1] == Point(0, 4));
-  EXPECT_TRUE(output[2] == Point(4, 0));
-}
-
-TEST(convex_hull_test, only_collinear_points) {
-  std::vector<Point> input;
-  input.push_back(Point(0, 0));
-  input.push_back(Point(1, 1));
-  input.push_back(Point(2, 2));
-  input.push_back(Point(3, 3));
-  auto output = get_convex_hull(input);
-  std::sort(output.begin(), output.end());
-  EXPECT_EQ(output.size(), 4);
-  EXPECT_TRUE(output[0] == Point(0, 0));
-  EXPECT_TRUE(output[1] == Point(1, 1));
-  EXPECT_TRUE(output[2] == Point(2, 2));
-  EXPECT_TRUE(output[3] == Point(3, 3));
-}
-
-\end{lstlisting}
-
-\subsection{Тесты параллельных реализаций (отличаются друг от друга функцией get\_convex\_hull\_[название технологии]) }
-\begin{lstlisting}
-
-void fill_vec(std::vector<Point>* vec, uint32_t size) {
-  std::set<Point> unique_points;
-  std::random_device dev;
-  std::mt19937 rng(dev());
-  std::uniform_int_distribution<int> dist(0, size << 1);
-  while (unique_points.size() != size) {
-    unique_points.insert(Point(dist(rng), dist(rng)));
-  }
-  std::copy(unique_points.begin(), unique_points.end(),
-            std::back_inserter(*vec));
-  std::shuffle(vec->begin(), vec->end(), rng);
-}
-
-void print_vecs(std::vector<Point> a, std::vector<Point> b) {
-  std::cout << "First size is " << a.size() << std::endl;
-  for (uint64_t i = 0; i < a.size(); ++i) {
-    std::cout << a[i].x << " " << a[i].y << std::endl;
-  }
-  std::cout << "Second size is " << b.size() << std::endl;
-  for (uint64_t i = 0; i < b.size(); ++i) {
-    std::cout << b[i].x << " " << b[i].y << std::endl;
-  }
-}
-
-TEST(convex_hull_test, return_empty_vector) {
-  std::vector<Point> input;
-  auto output = get_convex_hull(input);
-  auto output2 = get_convex_hull_std(input, 4);
-  EXPECT_EQ(output.size(), 0);
-  EXPECT_EQ(output2.size(), 0);
-}
-
-TEST(convex_hull_test, hull_of_three) {
-  std::vector<Point> input;
-  fill_vec(&input, 3);
-  auto output = get_convex_hull(input);
-  auto output2 = get_convex_hull_std(input, 8);
-  bool dumb_lint1 = output.size() == output2.size();
-  bool dumb_lint2 = output == output2;
-  bool dumb_lint3 = output.size() == 3;
-  EXPECT_EQ(dumb_lint1, true);
-  EXPECT_EQ(dumb_lint2, true);
-  EXPECT_EQ(dumb_lint3, true);
-}
-
-TEST(convex_hull_test, hull_of_ten) {
-  std::vector<Point> input;
-  fill_vec(&input, 10);
-  auto output = get_convex_hull(input);
-  auto output2 = get_convex_hull_std(input, 16);
-  if (output.size() != output2.size()) {
-    print_vecs(output, output2);
-    print_vecs(input, input);
-  }
-  bool dumb_lint1 = output.size() == output2.size();
-  bool dumb_lint2 = output == output2;
-  EXPECT_EQ(dumb_lint1, true);
-  EXPECT_EQ(dumb_lint2, true);
-}
-
-TEST(convex_hull_test, hull_of_hundred) {
-  std::vector<Point> input;
-  fill_vec(&input, 100);
-  auto output = get_convex_hull(input);
-  auto output2 = get_convex_hull_std(input, 32);
-  if (output.size() != output2.size()) {
-    print_vecs(output, output2);
-  }
-  bool dumb_lint1 = output.size() == output2.size();
-  bool dumb_lint2 = output == output2;
-  EXPECT_EQ(dumb_lint1, true);
-  EXPECT_EQ(dumb_lint2, true);
-}
-
-TEST(convex_hull_test, hull_of_thousand) {
-  std::vector<Point> input;
-  fill_vec(&input, 1000);
-  auto output = get_convex_hull(input);
-  auto output2 = get_convex_hull_std(input, 64);
-  bool dumb_lint1 = output.size() == output2.size();
-  bool dumb_lint2 = output == output2;
-  EXPECT_EQ(dumb_lint1, true);
-  EXPECT_EQ(dumb_lint2, true);
-}
-
-
-\end{lstlisting}
+  \section{Приложение 2}
+\subsection{Исходные данные}
+\begin{table}
+    \centering
+    \scriptsize
+    \input{tex/metrics.tex}
+\end{table}
+\newpage
+\section{Приложение 3}
+\subsection{Восстановленные коэффициенты}
+\begin{table}
+    \centering
+    \scriptsize
+    \input{tex/coeff.tex}
+\end{table}
 \end{document}

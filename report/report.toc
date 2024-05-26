@@ -2,19 +2,45 @@
 \contentsline {section}{\numberline {1}Введение}{3}{}%
 \contentsline {section}{\numberline {2}Постановка задачи}{4}{}%
 \contentsline {section}{\numberline {3}Экономические подходы в оценки конкурентоспособности товаров}{5}{}%
-\contentsline {subsection}{\numberline {3.1}Дифференциальный метод оценки конкурентоспости}{5}{}%
+\contentsline {subsection}{\numberline {3.1}Дифференциальный метод оценки конкурентоспособности}{5}{}%
 \contentsline {paragraph}{short}{6}{}%
 \contentsline {paragraph}{short}{6}{}%
 \contentsline {subsection}{\numberline {3.2}Комплексный метод оценки конкурентоспособности}{7}{}%
 \contentsline {section}{\numberline {4}Методика расчета конкурентоспособности}{9}{}%
 \contentsline {section}{\numberline {5}Реализация}{12}{}%
 \contentsline {subsection}{\numberline {5.1}Сбор данных}{12}{}%
-\contentsline {section}{\numberline {6}Востановление функции конкурентоспособности с помощью линейных параметров.}{16}{}%
-\contentsline {section}{\numberline {7}Приложение}{17}{}%
-\contentsline {subsection}{\numberline {7.1}Исходный код c++}{17}{}%
-\contentsline {subsubsection}{\numberline {7.1.1}Последовательная реализация}{17}{}%
-\contentsline {subsubsection}{\numberline {7.1.2}OMP}{18}{}%
-\contentsline {subsubsection}{\numberline {7.1.3}TBB}{20}{}%
-\contentsline {subsubsection}{\numberline {7.1.4}std::thread}{22}{}%
-\contentsline {subsection}{\numberline {7.2}Тесты последовательной реализации }{23}{}%
-\contentsline {subsection}{\numberline {7.3}Тесты параллельных реализаций (отличаются друг от друга функцией get\_convex\_hull\_[название технологии]) }{25}{}%
+\contentsline {paragraph}{}{15}{}%
+\contentsline {paragraph}{}{15}{}%
+\contentsline {section}{\numberline {6}Восстановление функции конкурентоспособности с помощью линейных параметров.}{16}{}%
+\contentsline {paragraph}{}{17}{}%
+\contentsline {paragraph}{}{18}{}%
+\contentsline {paragraph}{}{18}{}%
+\contentsline {paragraph}{}{19}{}%
+\contentsline {paragraph}{}{19}{}%
+\contentsline {paragraph}{}{19}{}%
+\contentsline {paragraph}{}{19}{}%
+\contentsline {paragraph}{}{20}{}%
+\contentsline {paragraph}{}{20}{}%
+\contentsline {paragraph}{}{20}{}%
+\contentsline {section}{\numberline {7}Увеличение размерности.}{20}{}%
+\contentsline {paragraph}{}{21}{}%
+\contentsline {paragraph}{}{21}{}%
+\contentsline {paragraph}{}{21}{}%
+\contentsline {paragraph}{}{21}{}%
+\contentsline {paragraph}{}{21}{}%
+\contentsline {paragraph}{}{21}{}%
+\contentsline {paragraph}{}{22}{}%
+\contentsline {section}{\numberline {8}Тестирование на реальном примере.}{22}{}%
+\contentsline {paragraph}{}{22}{}%
+\contentsline {paragraph}{}{22}{}%
+\contentsline {paragraph}{}{23}{}%
+\contentsline {section}{\numberline {9}Возможные применения.}{24}{}%
+\contentsline {section}{\numberline {10}Заключение}{25}{}%
+\contentsline {section}{\numberline {11}Приложение}{26}{}%
+\contentsline {subsection}{\numberline {11.1}Исходный код Python}{26}{}%
+\contentsline {subsubsection}{\numberline {11.1.1}main.py}{26}{}%
+\contentsline {subsubsection}{\numberline {11.1.2}data.py}{31}{}%
+\contentsline {section}{\numberline {12}Приложение 2}{34}{}%
+\contentsline {subsection}{\numberline {12.1}Исходные данные}{34}{}%
+\contentsline {section}{\numberline {13}Приложение 3}{36}{}%
+\contentsline {subsection}{\numberline {13.1}Восстановленные коэффициенты}{36}{}%

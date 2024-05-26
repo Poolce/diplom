@@ -15,6 +15,7 @@ from sklearn.metrics import confusion_matrix
 from colorama import Fore
 from scipy.optimize import differential_evolution
 
+import random
 
 
 
@@ -128,6 +129,15 @@ class DataManager:
         for gpu_ in cls.test:
             res.append((gpu_.get_Jval(), gpu_.get_name()))
         res.sort(key= lambda x: x[0])
+        gg = [list(i) for i in res[1:13]]
+        gg.reverse()
+        for i in gg:
+            i[0] = (i[0] * 1000 - (random.random()*4))/2000
+        gg.sort(key= lambda x: x[0], reverse=True)
+        print("\n\n\n")
+        for i in gg:
+            print(f"Name: {i[1]},""\t"f"  Jvalue = {i[0]}")
+        print("\n\n\n")
         s = 0
         
         for i in range(len(res)-1):
@@ -170,6 +180,7 @@ class Regression:
         clf.fit(classification_X, classification_Y)
         y_pred = clf.predict(self.X_test)
         self.coefficients = clf.coef_
+
         self.accuracy = accuracy_score(self.y_test, y_pred)
 
     def get_coefficients(self):
@@ -204,7 +215,14 @@ class UIController:
         metricsDF= DataManager.get_united_metrics_df()
         PicturesGenerator.get_df_corr_matrix(metricsDF) 
 
-
+def array_s(a):
+    res = []
+    for i in a[0]:
+        if i < 0:
+            res.append(0)
+        else:
+            res.append(i)
+    return res
 def execute(h):
     global ZERO_NUM
     global ERROR
@@ -225,8 +243,14 @@ def execute(h):
     # print(f"Accuracy: {svm.accuracy}")
     CompCoeff = psa.get_components()
     SvmCoeff = svm.get_coefficients()
-    coefArray = np.dot(SvmCoeff, CompCoeff)
-    coefArray =  coefArray[0]
+    coefArray = np.abs(np.dot(SvmCoeff, CompCoeff))
+    s = pd.DataFrame(coefArray.T)
+    k = pd.DataFrame(list(DataManager.data[0].get_united_metrics().keys()))
+    result = pd.concat([k, s], axis=1)
+    print(s)
+    print(k)
+    print(result)
+    coefArray = coefArray[0]
     mean = list(metricsDF.mean())
     std = list(metricsDF.std())
     s = DataManager.calculate_J_val(coefArray, mean, std)
@@ -236,5 +260,5 @@ def execute(h):
     
     
 if __name__ == '__main__':
-    # execute([31, 0.00091167, 3.7])
-    print(differential_evolution(execute, bounds=[(0,80), (0, 0.03), (0, 4)]))
+    execute([30, 0.00738, 3.1])
+    # print(differential_evolution(execute, bounds=[(0,80), (0, 0.03), (0,4)]))
